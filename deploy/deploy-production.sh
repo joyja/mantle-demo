@@ -4,5 +4,5 @@
 set -e
 
 # Run the pm2 deploy script
-cd /home/ubuntu/mantle
+cd /home/ubuntu/mantle-demo
 pm2 deploy production ecosystem.config.js update
