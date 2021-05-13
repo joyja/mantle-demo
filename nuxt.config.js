@@ -47,7 +47,7 @@ export default {
    ** apollo module configuration
    ** https://github.com/nuxt-community/apollo-module
    */
-   apollo: {
+  apollo: {
     clientConfigs: {
       default: '~/plugins/apollo-client-config.js',
     },

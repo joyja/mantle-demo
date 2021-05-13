@@ -6,9 +6,9 @@ module.exports = {
       args: 'start',
       env_production: {
         NODE_ENV: 'production',
-        NUXT_HOST: '0.0.0.0'
-      }
-    }
+        NUXT_HOST: '0.0.0.0',
+      },
+    },
   ],
 
   deploy: {
@@ -19,7 +19,7 @@ module.exports = {
       repo: 'git@gitlab.com:joyja/mantle-demo.git',
       path: '/home/ubuntu/mantle-demo',
       'post-deploy':
-        'npm install && npm run build && pm2 startOrRestart ecosystem.config.js --env production'
+        'npm install && npm run build && pm2 startOrRestart ecosystem.config.js --env production',
     },
-  }
+  },
 }
