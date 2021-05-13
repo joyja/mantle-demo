@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app :dark="dark">
     <v-navigation-drawer
       v-model="drawer"
       fixed
@@ -24,6 +24,8 @@
     </v-navigation-drawer>
     <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-spacer/>
+      <v-switch label="dark" v-model="dark"></v-switch>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -40,6 +42,7 @@
 export default {
   data() {
     return {
+      dark=false,
       clipped: false,
       drawer: false,
       fixed: false,
