@@ -1,5 +1,5 @@
 <template>
-  <v-app :dark="dark">
+  <v-app :light="!dark" :dark="dark">
     <v-navigation-drawer v-model="drawer" fixed app>
       <v-list>
         <v-list-item
@@ -21,7 +21,9 @@
     <v-app-bar fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-spacer />
-      <v-switch v-model="dark" label="dark"></v-switch>
+      <v-btn icon>
+        <v-icon @click="toggleLightDark()">mdi-brightness-4</v-icon>
+      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -59,6 +61,11 @@ export default {
       rightDrawer: false,
       title: 'Vuetify.js',
     }
+  },
+  methods: {
+    toggleLightDark() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
   },
 }
 </script>
