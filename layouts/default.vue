@@ -1,6 +1,6 @@
 <template>
   <v-app :light="!dark" :dark="dark">
-    <v-navigation-drawer v-model="drawer" fixed app>
+    <!-- <v-navigation-drawer v-model="drawer" fixed app>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -17,9 +17,9 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
     <v-app-bar fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-spacer />
       <v-btn icon>
         <v-icon @click="toggleLightDark()">mdi-brightness-4</v-icon>
