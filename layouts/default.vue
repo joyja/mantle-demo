@@ -18,19 +18,19 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer> -->
-    <v-app-bar fixed app>
+    <v-app-bar :class="$vuetify.theme.dark ? '' : 'grey lighten-1'" fixed app>
       <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer" /> -->
       <v-spacer />
       <v-btn icon>
         <v-icon @click="toggleLightDark()">mdi-brightness-4</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-main>
+    <v-main :class="$vuetify.theme.dark ? '' : 'grey lighten-3'">
       <v-container>
         <nuxt />
       </v-container>
     </v-main>
-    <v-footer absolute app>
+    <v-footer :class="$vuetify.theme.dark ? '' : 'grey lighten-1'" absolute app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>

@@ -17,13 +17,13 @@
         <stop
           id="stop1172"
           class="tank-liquid-top"
-          :offset="tankLevel / 50"
+          :offset="tankLiquidOffset"
           stop-opacity="1"
         />
         <stop
           id="stop1174"
           class="tank-inside-bottom"
-          :offset="tankLevel / 50"
+          :offset="tankLiquidOffset"
           stop-opacity="1"
         />
         <stop
@@ -647,8 +647,22 @@
               ry=".061"
               stroke-width=".036"
             />
+            <rect
+              id="rect1736"
+              :class="valve1On ? 'status-color-on' : 'status-color-off'"
+              rx=".061"
+              opacity="0.25"
+              width="18.084"
+              height="12.896"
+              x="31.871"
+              y="31.589"
+              ry=".061"
+              stroke-width=".036"
+            />
             <path
               id="valve1Indicator"
+              :class="valve1On ? 'valve-indicator-on' : 'valve-indicator-off'"
+              :style="`transform-origin: ${valve1IndicatorCenter.x}px ${valve1IndicatorCenter.y}px`"
               d="M39.552 50.179l-1.308.614-1.34.63 1.34.63 1.308.614 1.362.404 1.36-.404 1.309-.615 1.34-.63-1.34-.629-1.309-.614-1.36-.405z"
               fill="#1a1a1a"
               fill-opacity="1"
@@ -822,32 +836,30 @@
             {{ pump1Auto ? 'AUTO' : 'MANUAL' }}
           </text>
           <rect
-            id="rect5372"
-            width="44.534"
-            height="22.158"
-            x="-171.223"
-            y="116.871"
-            ry=".582"
+            id="pump1StatusRect"
+            :class="pump1Auto ? 'status-mode-auto' : 'status-mode-manual'"
             rx=".58"
-            fill="gray"
-            stroke="gray"
+            ry=".582"
+            x="-173.223"
+            y="116.871"
+            height="22.158"
+            width="49.534"
             stroke-width=".59"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <text
-            id="text5376"
-            xml:space="preserve"
+            id="text5370"
+            x="-148.551"
+            y="130.5"
             style="
               line-height: 1.25;
-              -inkscape-font-specification: 'Oswald, Normal';
               font-variant-ligatures: normal;
               font-variant-caps: normal;
               font-variant-numeric: normal;
               font-variant-east-asian: normal;
             "
-            x="-162.751"
-            y="133.978"
+            xml:space="preserve"
             font-style="normal"
             font-variant="normal"
             font-weight="400"
@@ -857,29 +869,11 @@
             letter-spacing="0"
             word-spacing="0"
             stroke-width=".118"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            fill="black"
           >
-            <tspan
-              id="tspan5374"
-              x="-162.751"
-              y="133.978"
-              style="
-                -inkscape-font-specification: 'Oswald, Normal';
-                font-variant-ligatures: normal;
-                font-variant-caps: normal;
-                font-variant-numeric: normal;
-                font-variant-east-asian: normal;
-              "
-              font-style="normal"
-              font-variant="normal"
-              font-weight="400"
-              font-stretch="normal"
-              font-size="14.091"
-              font-family="Oswald"
-              fill="#fff"
-              stroke-width=".118"
-            >
-              AUTO
-            </tspan>
+            {{ valve1Auto ? 'AUTO' : 'MANUAL' }}
           </text>
         </g>
       </g>
@@ -888,21 +882,53 @@
 </template>
 
 <script>
-import graphql from '~/graphql'
+import gsap from 'gsap'
+
 export default {
+  props: {
+    edgeNodes: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
-      edgeNodes: [],
       pump1RotorCenter: { x: null, y: null },
+      valve1IndicatorCenter: { x: null, y: null },
+      tankLiquidOffset: 0.5,
     }
   },
   computed: {
-    pump1On() {
-      if (this.edgeNodes.length > 0) {
+    valve1On() {
+      if (this.edgeNodes.length > 1) {
         return (
           `${
-            this.edgeNodes[0].devices[0].metrics.find(
-              (metric) => metric.name === 'AMotor.Auto'
+            this.edgeNodes[1].devices[0].metrics.find(
+              (metric) => metric.name === 'Valve1.Open'
+            ).value
+          }` === 'true'
+        )
+      }
+      return false
+    },
+    valve1Auto() {
+      if (this.edgeNodes.length > 1) {
+        return (
+          `${
+            this.edgeNodes[1].devices[0].metrics.find(
+              (metric) => metric.name === 'Valve1.Auto'
+            ).value
+          }` === 'true'
+        )
+      }
+      return false
+    },
+    pump1On() {
+      if (this.edgeNodes.length > 1) {
+        return (
+          `${
+            this.edgeNodes[1].devices[0].metrics.find(
+              (metric) => metric.name === 'Motor1.On'
             ).value
           }` === 'true'
         )
@@ -910,11 +936,11 @@ export default {
       return false
     },
     pump1Auto() {
-      if (this.edgeNodes.length > 0) {
+      if (this.edgeNodes.length > 1) {
         return (
           `${
-            this.edgeNodes[0].devices[0].metrics.find(
-              (metric) => metric.name === 'AMotor.Auto'
+            this.edgeNodes[1].devices[0].metrics.find(
+              (metric) => metric.name === 'Motor1.Auto'
             ).value
           }` === 'true'
         )
@@ -922,27 +948,32 @@ export default {
       return false
     },
     tankLevel() {
-      if (this.edgeNodes.length > 0) {
-        return this.edgeNodes[0].devices[0].metrics.find(
-          (metric) => metric.name === 'Temperature'
+      if (this.edgeNodes.length > 1) {
+        return this.edgeNodes[1].devices[0].metrics.find(
+          (metric) => metric.name === 'Tank1.Level'
         ).value
       }
       return 0
     },
   },
-  apollo: {
-    edgeNodes: {
-      query: graphql.query.edgeNodes,
-      pollInterval: 2500,
+  watch: {
+    tankLevel(value) {
+      gsap.to(this, { tankLiquidOffset: value / 100 })
     },
   },
-  mounted() {
-    const el = document.getElementById('pump1Rotor')
-    const bbox = el.getBBox()
-    this.pump1RotorCenter = {
-      x: bbox.x + bbox.width / 2,
-      y: bbox.y + bbox.height / 2,
-    }
+  beforeMount() {
+    this.pump1RotorCenter = this.getMiddle('pump1Rotor')
+    this.valve1IndicatorCenter = this.getMiddle('valve1Indicator')
+  },
+  methods: {
+    getMiddle(id) {
+      const el = document.getElementById(id)
+      const bbox = el.getBBox()
+      return {
+        x: bbox.x + bbox.width / 2,
+        y: bbox.y + bbox.height / 2,
+      }
+    },
   },
 }
 </script>
@@ -958,6 +989,14 @@ export default {
 .pump-rotor-off {
   opacity: 1;
   transform: rotate(0deg);
+  transition: all 2s ease-in;
+}
+.valve-indicator-on {
+  transform: rotate(0deg);
+  transition: all 2s ease-out;
+}
+.valve-indicator-off {
+  transform: rotate(90deg);
   transition: all 2s ease-in;
 }
 .status-color-on {
