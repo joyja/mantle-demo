@@ -7,6 +7,32 @@
     viewBox="0 0 1322.917 482.865"
   >
     <defs id="defs4237">
+      <linearGradient id="linearGradient1163">
+        <stop
+          id="stop1159"
+          class="tank-liquid-bottom"
+          offset="0"
+          stop-opacity="1"
+        />
+        <stop
+          id="stop1172"
+          class="tank-liquid-top"
+          :offset="(tankLevel - 22.8) / 0.5"
+          stop-opacity="1"
+        />
+        <stop
+          id="stop1174"
+          class="tank-inside-bottom"
+          :offset="(tankLevel - 22.8) / 0.5"
+          stop-opacity="1"
+        />
+        <stop
+          id="stop1161"
+          class="tank-inside-top"
+          offset="1"
+          stop-opacity="1"
+        />
+      </linearGradient>
       <linearGradient
         id="p"
         gradientUnits="userSpaceOnUse"
@@ -20,6 +46,20 @@
       <linearGradient id="a">
         <stop id="stop1681" offset="0" stop-color="gray" />
         <stop id="stop1683" offset="1" stop-color="#e6e6e6" />
+      </linearGradient>
+      <linearGradient id="linearGradientTank1Level">
+        <stop
+          id="stop1Tank1Level"
+          offset="0"
+          stop-color="blue"
+          stop-opacity="1"
+        />
+        <stop
+          id="stop2Tank1Level"
+          offset="1"
+          stop-color="blue"
+          stop-opacity="0"
+        />
       </linearGradient>
       <linearGradient
         id="n"
@@ -328,6 +368,15 @@
         gradientUnits="userSpaceOnUse"
         xlink:href="#linearGradient839"
       />
+      <linearGradient
+        id="linearGradient1165"
+        gradientUnits="userSpaceOnUse"
+        y2="36.834"
+        x2="30"
+        y1="179.205"
+        x1="30"
+        xlink:href="#linearGradient1163"
+      />
       <filter
         id="o"
         height="1.117"
@@ -429,7 +478,7 @@
             />
             <path
               id="rect5329"
-              opacity=".25"
+              opacity="0"
               fill="teal"
               d="M-246.452 87.324H328.54v32.811h-574.992z"
             />
@@ -451,7 +500,7 @@
             />
             <path
               id="rect5321"
-              opacity=".25"
+              opacity="0"
               fill="teal"
               d="M-246.452 87.324H328.54v32.811h-574.992z"
             />
@@ -473,7 +522,7 @@
             />
             <path
               id="rect5313"
-              opacity=".25"
+              opacity="0"
               fill="teal"
               d="M-246.452 87.324H328.54v32.811h-574.992z"
             />
@@ -495,7 +544,7 @@
             />
             <path
               id="rect845"
-              opacity=".25"
+              opacity="0"
               fill="teal"
               d="M-246.452 87.324H328.54v32.811h-574.992z"
             />
@@ -662,11 +711,9 @@
               stroke-dasharray="none"
             />
             <path
-              id="rect862"
+              id="pump1Color"
+              :class="pump1On ? 'status-color-on' : 'status-color-off'"
               d="M121.582 42.696v1.507H74.275v.069A47.027 47.027 0 0027.39 91.298a47.027 47.027 0 0047.026 47.026 47.027 47.027 0 0047.027-47.026 47.027 47.027 0 00-1.002-9.658h1.141v1.506h4.973v-40.45z"
-              opacity=".25"
-              fill="#00d400"
-              fill-opacity="1"
               stroke="none"
               stroke-width=".446"
               stroke-miterlimit="4"
@@ -709,7 +756,7 @@
               y="36.251"
               ry="3.495"
               rx="3.482"
-              fill="#b3b3b3"
+              fill="url(#linearGradient1165)"
               stroke="#666"
               stroke-width=".59"
             />
@@ -718,8 +765,8 @@
             id="outlet1"
             transform="matrix(.41262 0 0 .41394 149.272 74.107)"
             d="M461.589 160.51l-38.801 22.402-38.801 22.402v-89.607l38.8 22.401z"
-            fill="#333"
-            stroke="#333"
+            fill="grey"
+            stroke="grey"
             stroke-width="1.427"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -728,33 +775,31 @@
             id="inlet1"
             d="M461.589 160.51l-38.801 22.402-38.801 22.402v-89.607l38.8 22.401z"
             transform="matrix(.41262 0 0 .41394 -406.855 23.837)"
-            fill="#333"
-            stroke="#333"
+            fill="grey"
+            stroke="grey"
             stroke-width="1.427"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <rect
-            id="rect5366"
+            id="pump1StatusRect"
+            :class="pump1Auto ? 'status-mode-auto' : 'status-mode-manual'"
             rx=".58"
             ry=".582"
             y="91.403"
-            x="174.944"
+            x="172.444"
             height="22.158"
-            width="44.534"
-            fill="gray"
-            stroke="gray"
+            width="49.534"
             stroke-width=".59"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
           <text
             id="text5370"
-            y="108.51"
-            x="183.416"
+            y="105"
+            x="197"
             style="
               line-height: 1.25;
-              -inkscape-font-specification: 'Oswald, Normal';
               font-variant-ligatures: normal;
               font-variant-caps: normal;
               font-variant-numeric: normal;
@@ -770,29 +815,11 @@
             letter-spacing="0"
             word-spacing="0"
             stroke-width=".118"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            fill="black"
           >
-            <tspan
-              id="tspan5368"
-              style="
-                -inkscape-font-specification: 'Oswald, Normal';
-                font-variant-ligatures: normal;
-                font-variant-caps: normal;
-                font-variant-numeric: normal;
-                font-variant-east-asian: normal;
-              "
-              y="108.51"
-              x="183.416"
-              font-style="normal"
-              font-variant="normal"
-              font-weight="400"
-              font-stretch="normal"
-              font-size="14.091"
-              font-family="Oswald"
-              fill="#fff"
-              stroke-width=".118"
-            >
-              AUTO
-            </tspan>
+            {{ pump1Auto ? 'AUTO' : 'MANUAL' }}
           </text>
           <rect
             id="rect5372"
@@ -882,11 +909,31 @@ export default {
       }
       return false
     },
+    pump1Auto() {
+      if (this.edgeNodes.length > 0) {
+        return (
+          `${
+            this.edgeNodes[0].devices[0].metrics.find(
+              (metric) => metric.name === 'AMotor.Auto'
+            ).value
+          }` === 'true'
+        )
+      }
+      return false
+    },
+    tankLevel() {
+      if (this.edgeNodes.length > 0) {
+        return this.edgeNodes[0].devices[0].metrics.find(
+          (metric) => metric.name === 'Temperature'
+        ).value
+      }
+      return 0
+    },
   },
   apollo: {
     edgeNodes: {
       query: graphql.query.edgeNodes,
-      pollInterval: 5000,
+      pollInterval: 2500,
     },
   },
   mounted() {
@@ -900,7 +947,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~vuetify/src/styles/settings/_colors.scss';
+
 .pump-rotor-on {
   opacity: 0;
   transform: rotate(270deg);
@@ -910,5 +959,40 @@ export default {
   opacity: 1;
   transform: rotate(0deg);
   transition: all 2s ease-in;
+}
+.status-color-on {
+  fill: map-get($green, 'lighten-1');
+  opacity: 0.4;
+  transition: all 0.3s ease-in;
+}
+.status-color-off {
+  fill: transparent;
+  transition: all 0.3s ease-in;
+}
+.status-mode-auto {
+  fill: map-get($grey, 'lighten-1');
+  transition: all 0.3s ease-in;
+  stroke: map-get($grey, 'darken-1');
+}
+.status-mode-manual {
+  fill: map-get($orange, 'lighten-1');
+  transition: all 0.3s ease-in;
+  stroke: map-get($orange, 'darken-4');
+}
+.tank-liquid-bottom {
+  stop-color: map-get($blue, 'darken-4');
+  transition: all 0.3s ease-in;
+}
+.tank-liquid-top {
+  stop-color: map-get($blue, 'base');
+  transition: all 0.3s ease-in;
+}
+.tank-inside-bottom {
+  stop-color: map-get($grey, 'base');
+  transition: all 0.3s ease-in;
+}
+.tank-inside-top {
+  stop-color: map-get($grey, 'darken-2');
+  transition: all 0.3s ease-in;
 }
 </style>

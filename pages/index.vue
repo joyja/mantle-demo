@@ -1,7 +1,11 @@
 <template>
   <v-container>
     <v-row justify="center" align="center">
-      <jar-process />
+      <v-card class="flex-grow-0 flex-shrink-1" style="flex-basis: 800px">
+        <v-card-text>
+          <jar-process />
+        </v-card-text>
+      </v-card>
     </v-row>
     <v-row justify="center" align="center">
       <v-card class="mt-5">
@@ -24,6 +28,7 @@
 </template>
 
 <script>
+import graphql from '~/graphql'
 import Process from '~/components/Process'
 
 export default {
@@ -34,6 +39,12 @@ export default {
     return {
       edgeNodes: [],
     }
+  },
+  apollo: {
+    edgeNodes: {
+      query: graphql.query.edgeNodes,
+      pollInterval: 2500,
+    },
   },
 }
 </script>
