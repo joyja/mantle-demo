@@ -17,13 +17,13 @@
         <stop
           id="stop1172"
           class="tank-liquid-top"
-          :offset="(tankLevel - 22.8) / 0.5"
+          :offset="tankLevel / 50"
           stop-opacity="1"
         />
         <stop
           id="stop1174"
           class="tank-inside-bottom"
-          :offset="(tankLevel - 22.8) / 0.5"
+          :offset="tankLevel / 50"
           stop-opacity="1"
         />
         <stop
@@ -980,11 +980,11 @@ export default {
   stroke: map-get($orange, 'darken-4');
 }
 .tank-liquid-bottom {
-  stop-color: map-get($blue, 'darken-4');
+  stop-color: map-get($light-blue, 'darken-4');
   transition: all 0.3s ease-in;
 }
 .tank-liquid-top {
-  stop-color: map-get($blue, 'base');
+  stop-color: map-get($light-blue, 'base');
   transition: all 0.3s ease-in;
 }
 .tank-inside-bottom {
