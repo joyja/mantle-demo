@@ -14,8 +14,9 @@
   "dependencies": {
     "@nuxt/content": "^1.14.0",
     "@nuxtjs/apollo": "^4.0.1-rc.5",
-    "chart.js": "^3.2.1",
+    "chart.js": "^2.9.4",
     "core-js": "^3.12.1",
+    "date-fns": "^2.21.3",
     "graphql-tag": "^2.12.4",
     "gsap": "^3.6.1",
     "nuxt": "^2.15.6",

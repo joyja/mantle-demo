@@ -46,6 +46,13 @@
         </v-card-text>
       </v-card>
     </v-row>
+    <v-row justify="center" align="center">
+      <v-card class="mt-3 flex-grow-0 flex-shrink-1" style="flex-basis: 800px">
+        <v-card-text>
+          <jar-line-chart :edge-nodes="edgeNodes"></jar-line-chart>
+        </v-card-text>
+      </v-card>
+    </v-row>
     <v-row v-if="false" justify="center" align="center">
       <v-card class="mt-5">
         <v-list v-if="edgeNodes.length > 1">
@@ -74,10 +81,12 @@
 <script>
 import graphql from '~/graphql'
 import Process from '~/components/Process'
+import LineChartTest from '~/components/charts/LineChartTest'
 
 export default {
   components: {
     jarProcess: Process,
+    jarLineChart: LineChartTest,
   },
   async asyncData({ app, params }) {
     const provider = app.apolloProvider
@@ -101,6 +110,10 @@ export default {
   data() {
     return {
       edgeNodes: [],
+      lineChart: {
+        data: {},
+        options: {},
+      },
     }
   },
   computed: {
