@@ -10,6 +10,10 @@ const edgeNodes = gql`
         ...EdgeDeviceBasic
         metrics {
           ...EdgeDeviceMetricBasic
+          history {
+            timestamp
+            value
+          }
         }
       }
     }
