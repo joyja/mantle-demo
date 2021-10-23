@@ -900,10 +900,10 @@ export default {
   },
   computed: {
     valve1On() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return (
           `${
-            this.edgeNodes[1].devices[0].metrics.find(
+            this.edgeNodes[0].devices[0].metrics.find(
               (metric) => metric.name === 'Valve1.Open'
             ).value
           }` === 'true'
@@ -912,10 +912,10 @@ export default {
       return false
     },
     valve1Auto() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return (
           `${
-            this.edgeNodes[1].devices[0].metrics.find(
+            this.edgeNodes[0].devices[0].metrics.find(
               (metric) => metric.name === 'Valve1.Auto'
             ).value
           }` === 'true'
@@ -924,10 +924,10 @@ export default {
       return false
     },
     pump1On() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return (
           `${
-            this.edgeNodes[1].devices[0].metrics.find(
+            this.edgeNodes[0].devices[0].metrics.find(
               (metric) => metric.name === 'Motor1.On'
             ).value
           }` === 'true'
@@ -936,10 +936,10 @@ export default {
       return false
     },
     pump1Auto() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return (
           `${
-            this.edgeNodes[1].devices[0].metrics.find(
+            this.edgeNodes[0].devices[0].metrics.find(
               (metric) => metric.name === 'Motor1.Auto'
             ).value
           }` === 'true'
@@ -948,8 +948,8 @@ export default {
       return false
     },
     tankLevel() {
-      if (this.edgeNodes.length > 1) {
-        return this.edgeNodes[1].devices[0].metrics.find(
+      if (this.edgeNodes.length >= 1) {
+        return this.edgeNodes[0].devices[0].metrics.find(
           (metric) => metric.name === 'Tank1.Level'
         ).value
       }

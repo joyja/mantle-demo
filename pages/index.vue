@@ -55,9 +55,9 @@
     </v-row>
     <v-row v-if="false" justify="center" align="center">
       <v-card class="mt-5">
-        <v-list v-if="edgeNodes.length > 1">
+        <v-list v-if="edgeNodes.length >= 1">
           <v-list-item
-            v-for="metric in edgeNodes[1].devices[0].metrics"
+            v-for="metric in edgeNodes[0].devices[0].metrics"
             :key="metric.name"
           >
             <v-list-item-content>
@@ -118,9 +118,9 @@ export default {
   },
   computed: {
     tankLevel() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return parseFloat(
-          this.edgeNodes[1].devices[0].metrics.find(
+          this.edgeNodes[0].devices[0].metrics.find(
             (metric) => metric.name === 'Tank1.Level'
           ).value
         ).toFixed(0)
@@ -128,9 +128,9 @@ export default {
       return 0
     },
     inletFlow() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return parseFloat(
-          this.edgeNodes[1].devices[0].metrics.find(
+          this.edgeNodes[0].devices[0].metrics.find(
             (metric) => metric.name === 'Inlet Flow'
           ).value
         ).toFixed(0)
@@ -138,9 +138,9 @@ export default {
       return 0
     },
     outletFlow() {
-      if (this.edgeNodes.length > 1) {
+      if (this.edgeNodes.length >= 1) {
         return parseFloat(
-          this.edgeNodes[1].devices[0].metrics.find(
+          this.edgeNodes[0].devices[0].metrics.find(
             (metric) => metric.name === 'Outlet Flow'
           ).value
         ).toFixed(0)

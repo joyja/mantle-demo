@@ -50,14 +50,14 @@ export default {
   },
   computed: {
     datacollection() {
-      if (this.edgeNodes.length > 1) {
-        const tankLevelMetric = this.edgeNodes[1].devices[0].metrics.find(
+      if (this.edgeNodes.length >= 1) {
+        const tankLevelMetric = this.edgeNodes[0].devices[0].metrics.find(
           (metric) => metric.name === 'Tank1.Level'
         )
-        const inletFlowMetric = this.edgeNodes[1].devices[0].metrics.find(
+        const inletFlowMetric = this.edgeNodes[0].devices[0].metrics.find(
           (metric) => metric.name === 'Inlet Flow'
         )
-        const outletFlowMetric = this.edgeNodes[1].devices[0].metrics.find(
+        const outletFlowMetric = this.edgeNodes[0].devices[0].metrics.find(
           (metric) => metric.name === 'Outlet Flow'
         )
         // const labels = metric.history.map((row) => {
