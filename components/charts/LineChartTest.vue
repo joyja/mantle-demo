@@ -63,24 +63,36 @@ export default {
         // const labels = metric.history.map((row) => {
         //   return fromUnixTime(row.timestamp)
         // })
-        const tankLevelData = tankLevelMetric.history.map((row) => {
-          return {
-            y: row.value,
-            x: fromUnixTime(row.timestamp),
-          }
-        })
-        const inletFlowData = inletFlowMetric.history.map((row) => {
-          return {
-            y: row.value,
-            x: fromUnixTime(row.timestamp),
-          }
-        })
-        const outletFlowData = outletFlowMetric.history.map((row) => {
-          return {
-            y: row.value,
-            x: fromUnixTime(row.timestamp),
-          }
-        })
+        const tankLevelData = tankLevelMetric.history
+          .map((row) => {
+            return {
+              y: row.value,
+              x: fromUnixTime(row.timestamp),
+            }
+          })
+          .sort((a, b) => {
+            return a.timestamp - b.timestamp
+          })
+        const inletFlowData = inletFlowMetric.history
+          .map((row) => {
+            return {
+              y: row.value,
+              x: fromUnixTime(row.timestamp),
+            }
+          })
+          .sort((a, b) => {
+            return a.timestamp - b.timestamp
+          })
+        const outletFlowData = outletFlowMetric.history
+          .map((row) => {
+            return {
+              y: row.value,
+              x: fromUnixTime(row.timestamp),
+            }
+          })
+          .sort((a, b) => {
+            return a.timestamp - b.timestamp
+          })
         return {
           datasets: [
             {

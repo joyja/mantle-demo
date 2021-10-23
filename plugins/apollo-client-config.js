@@ -1,8 +1,8 @@
 import { InMemoryCache } from 'apollo-cache-inmemory'
 export default function (context) {
   return {
-    httpEndpoint: `https://mantle1.jarautomation.io`,
-    wsEndpoint: `wss://mantle1.jarautomation.io`,
+    httpEndpoint: process.env.mantleHttpEndoint,
+    wsEndpoint: process.env.mantleWsEndpoint,
     cache: new InMemoryCache({}),
   }
 }
