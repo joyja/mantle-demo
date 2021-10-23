@@ -2,8 +2,14 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   env: {
-    mantleHttpEndpoint: process.env.MANTLE_HTTP_ENDPOINT || `https://mantle1.jarautomation.io`,
-    mantleWsEndpoint: process.env.MANTLE_WS_ENDPOINT || `wss://mantle1.jarautomation.io`,
+    mantleServerSecure: process.env.MANTLE_SERVER_SECURE || false,
+    mantleServerHost: process.env.MANTLE_SERVER_HOST,
+    mantleServerPort: process.env.MANTLE_SERVER_PORT || 4000,
+    mantleServerUrl: process.env.MANTLE_SERVER_URL,
+    mantleClientSecure: process.env.MANTLE_CLIENT_SECURE || false,
+    mantleClientHost: process.env.MANTLE_CLIENT_HOST,
+    mantleClientPort: process.env.MANTLE_CLIENT_PORT,
+    mantleClientUrl: process.env.MANTLE_CLIENT_URL,
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
